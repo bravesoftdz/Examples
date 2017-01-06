@@ -40,8 +40,8 @@ function build-RPi3 {
     build $1 "-CpARMV7A -WpRPI3B" rpi3.cfg
 }
 
-for EXAMPLE in [0-9][0-9]-*
-do
+function example {
+    EXAMPLE="$1"
     cd $EXAMPLE
     echo
     echo $EXAMPLE
@@ -54,4 +54,19 @@ do
         cd ..
     done
     cd ..
+}
+
+for EXAMPLE in [0-9][0-9]-*
+do
+    example $EXAMPLE
 done
+
+cd Advanced
+for EXAMPLE in *
+do
+    if [ "$EXAMPLE" != "README.md" ]
+    then
+        example $EXAMPLE
+    fi
+done
+cd ..
