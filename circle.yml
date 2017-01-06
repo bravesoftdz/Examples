@@ -9,4 +9,5 @@ dependencies:
     - docker pull markfirmware/ufpc
 test:
   override:
+    - echo
     - ./docker-build-examples.sh
