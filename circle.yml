@@ -3,11 +3,14 @@ machine:
     - docker
     
 dependencies:
+  cache_directories:
+    - "docker-cache"
+  override:
+    - if [[ -e docker-cache/ufpc.tar ]]; then docker load -i docker-cache/ufpc.tar; else docker pull markfirmware/ufpc; mkdir -p docker-cache; docker save markfirmware/ufpc > docker-cache/ufpc.tar; fi
   post:
     - sudo apt-get update
     - sudo apt-get install -y qemu-system-arm
     - docker pull markfirmware/ufpc
 test:
   override:
-    - echo
     - ./docker-build-examples.sh
