@@ -30,6 +30,7 @@ $RECYCLE.BIN/
 *.lps
 *.elf
 *.img
+*.bin
 *.list
 *.compiled
 

@@ -1,0 +1,12 @@
+machine:
+  services:
+    - docker
+    
+dependencies:
+  post:
+    - sudo apt-get update
+    - sudo apt-get install -y qemu-system-arm
+    - docker pull markfirmware/ufpc
+test:
+  override:
+    - ./docker-build-examples.sh
