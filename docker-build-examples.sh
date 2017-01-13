@@ -25,7 +25,7 @@ function build {
     grep -i warning build.log
     EXIT_STATUS=$?
     rm build.log
-    if [ "$EXIT_STATUS" != 0 ]
+    if [ "$EXIT_STATUS" == 0 ]
     then
         exit 1
     fi
