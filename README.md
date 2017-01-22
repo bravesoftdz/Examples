@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/markfirmware/Examples/tree/circleci.svg?style=svg)](https://circleci.com/gh/markfirmware/Examples/tree/circleci)
+
 Ultibo example projects
 
 These examples are included in the Ultibo core installer download and can be found from the Lazarus IDE by selecting Tools, Example Projects.. from the menu.
