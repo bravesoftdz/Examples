@@ -97,6 +97,7 @@ function build-example {
     then
         for TARGET_PATH in $TARGETS_PATH/*
         do
+            echo TARGET_PATH $TARGET_PATH
             build-as $(basename $TARGET_PATH) $TARGET_PATH ultibohub/Examples
         done
     fi
@@ -105,6 +106,7 @@ function build-example {
 function build-as {
     local CONTROLLER=$1
     local SRC_FOLDER=$2
+    echo CONTROLLER $CONTROLLER SRC_FOLDER $SRC_FOLDER
     local LPR_FILE=
     if [[ -d $SRC_FOLDER ]]
     then
