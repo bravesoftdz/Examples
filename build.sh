@@ -92,12 +92,10 @@ function build-examples {
 
 function build-example {
     TARGETS_PATH=$1
-    echo TARGETS_PATH $TARGETS_PATH
     if [[ -d $TARGETS_PATH ]]
     then
         for TARGET_PATH in $TARGETS_PATH/*
         do
-            echo TARGET_PATH $TARGET_PATH
             build-as $(basename $TARGET_PATH) $TARGET_PATH ultibohub/Examples
         done
     fi
@@ -106,7 +104,6 @@ function build-example {
 function build-as {
     local CONTROLLER=$1
     local SRC_FOLDER=$2
-    echo CONTROLLER $CONTROLLER SRC_FOLDER $SRC_FOLDER
     local LPR_FILE=
     if [[ -d $SRC_FOLDER ]]
     then
@@ -141,7 +138,7 @@ function build-lpr {
     local CFG_NAME=$6
     local INCLUDES="-Fi/root/ultibo/core/fpc/source/packages/fv/src -Fi/root/ultibo/core/fpc/source/rtl/ultibo/core"
     log .... building $LPR_FILE $CONTROLLER
-    mkdir -p $ARTIFACTS/$CONTROLLER $OBJ/$CONTROLLER && \
+    mkdir -p $ARTIFACTS/$LPR_FILE/$CONTROLLER $OBJ/$CONTROLLER && \
     ultibo-bash fpc \
      -d$CONTROLLER_SYMBOL \
      -l- \
