@@ -27,6 +27,18 @@ begin
   end;
 end;
 
+procedure SetPilot(SerialDeviceName:String);
+begin
+ Pilot:=SerialDeviceFindByName(SerialDeviceName);
+ if Assigned(Pilot) then
+  begin
+   if SerialDeviceOpen(Pilot,9600,SERIAL_DATA_8BIT,SERIAL_STOP_1BIT,SERIAL_PARITY_NONE,SERIAL_FLOW_NONE,0,0) <> ERROR_SUCCESS then
+    begin
+     Pilot:=nil;
+    end;
+  end;
+end;
+
 procedure ParseCommandLine;
 var
  I,Start:Cardinal;
@@ -68,18 +80,6 @@ begin
    else
     begin
      Sleep(100);
-    end;
-  end;
-end;
-
-procedure SetPilot(SerialDeviceName:String);
-begin
- Pilot:=SerialDeviceFindByName(SerialDeviceName);
- if Assigned(Pilot) then
-  begin
-   if SerialDeviceOpen(Pilot,9600,SERIAL_DATA_8BIT,SERIAL_STOP_1BIT,SERIAL_PARITY_NONE,SERIAL_FLOW_NONE,0,0) <> ERROR_SUCCESS then
-    begin
-     Pilot:=nil;
     end;
   end;
 end;
