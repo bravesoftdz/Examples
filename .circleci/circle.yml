@@ -1,0 +1,19 @@
+version: 2
+executorType: docker
+containerInfo:
+  - image: markfirmware/ultibo-1.3.271-x64-1.0.0
+stages:
+  build:
+    workDir: ~/Examples
+    steps:
+      - type: checkout
+      - name: Build and test
+        type: shell
+        command: ./build.sh
+      - name: List files
+        type: shell
+        command: ls -ltR
+      - name: Save artifacts
+        type: artifacts-store
+        path: artifacts
+        destination: Examples
