@@ -32,7 +32,8 @@ var
  Key:Char;
 begin
  TrapCtrlAltDel:=0;
- Sleep(3 * 1000);
+ Sleep(5 * 1000);
+ LoggingOutput('PilotClient starting');
  Pilot:=nil;
  ParseCommandLine;
  while True do
