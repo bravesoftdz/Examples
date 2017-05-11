@@ -189,4 +189,3 @@ mkdir -p $ARTIFACTS $OBJ
 build-examples
 
 create-build-summary
-
