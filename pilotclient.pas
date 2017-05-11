@@ -27,12 +27,30 @@ begin
   end;
 end;
 
+procedure ParseCommandLine;
+var
+ I,Start:Cardinal;
+ Param:String;
+begin
+ for I:=0 to ParamCount do
+  begin
+   Param:=ParamStr(I);
+   LoggingOutput(Format('Param %d = %s',[I,Param]));
+   if AnsiStartsStr('pilotrequestsserialdevice=',Param) then
+    begin
+     Start:=PosEx('=',Param);
+     SetPilot(MidStr(Param,Start + 1,Length(Param) - Start));
+    end;
+  end;
+end;
+
 function TrapCtrlAltDel(Parameter:Pointer):PtrInt;
 var
  Key:Char;
 begin
  TrapCtrlAltDel:=0;
  Sleep(7 * 1000);
+ LoggingOutput('');
  LoggingOutput('PilotClient starting');
  Pilot:=nil;
  ParseCommandLine;
@@ -62,23 +80,6 @@ begin
    if SerialDeviceOpen(Pilot,9600,SERIAL_DATA_8BIT,SERIAL_STOP_1BIT,SERIAL_PARITY_NONE,SERIAL_FLOW_NONE,0,0) <> ERROR_SUCCESS then
     begin
      Pilot:=nil;
-    end;
-  end;
-end;
-
-procedure ParseCommandLine;
-var
- I,Start:Cardinal;
- Param:String;
-begin
- for I:=0 to ParamCount do
-  begin
-   Param:=ParamStr(I);
-   LoggingOutput(Format('Param %d = %s',[I,Param]));
-   if AnsiStartsStr('pilotrequestsserialdevice=',Param) then
-    begin
-     Start:=PosEx('=',Param);
-     SetPilot(MidStr(Param,Start + 1,Length(Param) - Start));
     end;
   end;
 end;
