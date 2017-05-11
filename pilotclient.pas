@@ -14,19 +14,24 @@ var
  ThreadHandle:TThreadHandle;
  Pilot:PSerialDevice;
 
-procedure PilotSendRequest(Request:String);
+procedure SerialWriteLn(Line:String);
 var
- FullRequest:String;
  Count:Cardinal;
  Status:LongWord;
 begin
+ Status:=SerialDeviceWrite(Pilot,PChar(Line + Char(10)),Length(Line) + 1,SERIAL_FLAG_NONE,Count);
+ if Status <> ERROR_SUCCESS then
+  LoggingOutput(Format('serial write error %d',[Status]));
+end;
+
+procedure PilotSendRequest(Request:String);
+var
+ FullRequest:String;
+begin
  if Assigned(Pilot) then
   begin
-   FullRequest:=Format('pilotrequest %s\n',[Request]);
+   FullRequest:=Format('pilotrequest %s',[Request]);
    LoggingOutput(FullRequest);
-   Status:=SerialDeviceWrite(Pilot,PChar(FullRequest),Length(FullRequest),SERIAL_FLAG_NONE,Count);
-   if Status <> ERROR_SUCCESS then
-    LoggingOutput(Format('serial write error %d',[Status]));
   end;
 end;
 
@@ -34,15 +39,13 @@ procedure SetPilot(SerialDeviceName:String);
 var
  Status:LongWord;
 begin
- LoggingOutput(Format('name %s',[SerialDeviceName]));
  Pilot:=SerialDeviceFindByName(SerialDeviceName);
  if Assigned(Pilot) then
   begin
-   LoggingOutput(Format('assigned',[]));
    Status:=SerialDeviceOpen(Pilot,9600,SERIAL_DATA_8BIT,SERIAL_STOP_1BIT,SERIAL_PARITY_NONE,SERIAL_FLOW_NONE,0,0);
    if Status <> ERROR_SUCCESS then
     begin
-     LoggingOutput(Format('error %d',[Status]));
+     LoggingOutput(Format('serial open error %d',[Status]));
      Pilot:=nil;
     end;
   end;
