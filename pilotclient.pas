@@ -28,12 +28,18 @@ begin
 end;
 
 procedure SetPilot(SerialDeviceName:String);
+var
+ Status:LongWord;
 begin
+ LoggingOutput(Format('name %s',[SerialDeviceName]));
  Pilot:=SerialDeviceFindByName(SerialDeviceName);
  if Assigned(Pilot) then
   begin
-   if SerialDeviceOpen(Pilot,9600,SERIAL_DATA_8BIT,SERIAL_STOP_1BIT,SERIAL_PARITY_NONE,SERIAL_FLOW_NONE,0,0) <> ERROR_SUCCESS then
+   LoggingOutput(Format('assigned',[]));
+   Status:=SerialDeviceOpen(Pilot,9600,SERIAL_DATA_8BIT,SERIAL_STOP_1BIT,SERIAL_PARITY_NONE,SERIAL_FLOW_NONE,0,0);
+   if Status <> ERROR_SUCCESS then
     begin
+     LoggingOutput(Format('error %d',[Status]));
      Pilot:=nil;
     end;
   end;
