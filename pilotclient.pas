@@ -26,7 +26,7 @@ begin
    LoggingOutput(FullRequest);
    Status:=SerialDeviceWrite(Pilot,PChar(FullRequest),Length(FullRequest),SERIAL_FLAG_NONE,Count);
    if Status <> ERROR_SUCCESS then
-    LoggingOutput('serial write error %d',[Status]));
+    LoggingOutput(Format('serial write error %d',[Status]));
   end;
 end;
 
