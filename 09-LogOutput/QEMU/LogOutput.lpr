@@ -17,7 +17,7 @@ program LogOutput;
 
 {Declare some units used by this example.}
 uses
-  ../../PilotClient,
+  PilotClient,
   QEMUVersatilePB,
   GlobalConst,
   GlobalTypes,

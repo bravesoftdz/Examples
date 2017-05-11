@@ -153,6 +153,7 @@ function build-lpr {
      -Mdelphi \
      -FuSource \
      -Fugh/ultibohub/Asphyre/Source \
+     -Fu../.. \
      -FE$OBJ/$CONTROLLER \
      $INCLUDES \
      $CONTROLLER_COMPILER_OPTIONS \
