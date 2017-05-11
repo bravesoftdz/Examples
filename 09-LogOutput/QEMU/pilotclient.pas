@@ -5,15 +5,15 @@ interface
 
 implementation
 
-//uses
-// QEMUVersatilePB,PlatformQemuVpb,VersatilePB,
-// Crt,GlobalConfig,GlobalConst,GlobalTypes,Logging,Platform,Serial,
-// StrUtils,SysUtils,Threads,Ultibo;
-//
+uses
+ QEMUVersatilePB,PlatformQemuVpb,VersatilePB,
+ Crt,GlobalConfig,GlobalConst,GlobalTypes,Logging,Platform,Serial,
+ StrUtils,SysUtils,Threads,Ultibo;
+
 //var
-//// ThreadHandle:TThreadHandle;
+// ThreadHandle:TThreadHandle;
 // Pilot:PSerialDevice;
-//
+
 //procedure PilotSendRequest(Request:String);
 //var
 // FullRequest:String;
@@ -26,7 +26,7 @@ implementation
 //   SerialDeviceWrite(Pilot,PChar(FullRequest),Length(FullRequest),SERIAL_FLAG_NONE,Count);
 //  end;
 //end;
-//
+
 //function TrapCtrlAltDel(Parameter:Pointer):PtrInt;
 //var
 // Key:Char;
@@ -51,7 +51,7 @@ implementation
 //    end;
 //  end;
 //end;
-//
+
 //procedure SetPilot(SerialDeviceName:String);
 //begin
 // Pilot:=SerialDeviceFindByName(SerialDeviceName);
@@ -63,7 +63,7 @@ implementation
 //    end;
 //  end;
 //end;
-//
+
 //procedure ParseCommandLine;
 //var
 // I,Start:Cardinal;
@@ -79,7 +79,7 @@ implementation
 //    end;
 //  end;
 //end;
-//
+
 initialization
 // ThreadHandle:=BeginThread(@TrapCtrlAltdel,nil,ThreadHandle,THREAD_STACK_DEFAULT_SIZE);
 end.
