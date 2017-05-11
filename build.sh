@@ -119,8 +119,8 @@ function build-as {
         then
             case $CONTROLLER in
                 QEMU)
-                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_QEMUVPB "-CpARMV7A -WpQEMUVPB" qemuvpb.cfg
-                    test-qemu-controller ;;
+                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_QEMUVPB "-CpARMV7A -WpQEMUVPB" qemuvpb.cfg ;;
+#                   test-qemu-controller ;;
                 RPi)
                     build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_RPI_INCLUDING_RPI0 "-CpARMV6 -WpRPIB" rpi.cfg ;;
                 RPi2)
