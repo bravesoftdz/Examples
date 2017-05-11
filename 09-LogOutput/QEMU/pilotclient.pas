@@ -7,9 +7,8 @@ implementation
 
 uses
  QEMUVersatilePB,PlatformQemuVpb,VersatilePB,
-// Crt,
  GlobalConfig,GlobalConst,GlobalTypes,Logging,Platform,Serial,
- StrUtils,SysUtils,Threads,Ultibo;
+ StrUtils,SysUtils,Threads,Ultibo,Crt;
 
 //var
 // ThreadHandle:TThreadHandle;
