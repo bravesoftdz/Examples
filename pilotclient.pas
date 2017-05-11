@@ -81,5 +81,5 @@ begin
 end;
 
 initialization
- ThreadHandle:=BeginThread(@TrapCtrlAltdel,nil,ThreadHandle,THREAD_STACK_DEFAULT_SIZE);
+// ThreadHandle:=BeginThread(@TrapCtrlAltdel,nil,ThreadHandle,THREAD_STACK_DEFAULT_SIZE);
 end.
