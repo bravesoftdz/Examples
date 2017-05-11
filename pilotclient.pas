@@ -11,7 +11,7 @@ uses
  StrUtils,SysUtils,Threads,Ultibo;
 
 var
- ThreadHandle:TThreadHandle;
+// ThreadHandle:TThreadHandle;
  Pilot:PSerialDevice;
 
 procedure PilotSendRequest(Request:String);
