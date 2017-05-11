@@ -18,12 +18,15 @@ procedure PilotSendRequest(Request:String);
 var
  FullRequest:String;
  Count:Cardinal;
+ Status:LongWord;
 begin
  if Assigned(Pilot) then
   begin
-   FullRequest:=Format('pilotrequest %s',[Request]);
+   FullRequest:=Format('pilotrequest %s\n',[Request]);
    LoggingOutput(FullRequest);
-   SerialDeviceWrite(Pilot,PChar(FullRequest),Length(FullRequest),SERIAL_FLAG_NONE,Count);
+   Status:=SerialDeviceWrite(Pilot,PChar(FullRequest),Length(FullRequest),SERIAL_FLAG_NONE,Count);
+   if Status <> ERROR_SUCCESS then
+    LoggingOutput('serial write error %d',[Status]));
   end;
 end;
 
