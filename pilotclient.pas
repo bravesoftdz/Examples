@@ -14,12 +14,12 @@ var
  ThreadHandle:TThreadHandle;
  Pilot:PSerialDevice;
 
-procedure SerialWriteLn(Line:String);
+procedure PilotWriteLn(Line:String);
 var
  Count:Cardinal;
  Status:LongWord;
 begin
- Status:=SerialDeviceWrite(Pilot,PChar(Line + Char(10)),Length(Line) + 1,SERIAL_FLAG_NONE,Count);
+ Status:=SerialDeviceWrite(Pilot,PChar(Line + #13 + #10),Length(Line) + 2,Count);
  if Status <> ERROR_SUCCESS then
   LoggingOutput(Format('serial write error %d',[Status]));
 end;
@@ -32,6 +32,7 @@ begin
   begin
    FullRequest:=Format('pilotrequest %s',[Request]);
    LoggingOutput(FullRequest);
+   PilotWriteLn(FullRequest);
   end;
 end;
 
