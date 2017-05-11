@@ -92,11 +92,12 @@ function build-examples {
 
 function build-example {
     TARGETS_PATH=$1
+    TARGET_NAME=$(basename $TARGETS_PATH)
     if [[ -d $TARGETS_PATH ]]
     then
         for TARGET_PATH in $TARGETS_PATH/*
         do
-            build-as $(basename $TARGET_PATH) $TARGET_PATH ultibohub/Examples
+            build-as $(basename $TARGET_PATH) $TARGET_PATH $TARGET_NAME
         done
     fi
 }
@@ -104,6 +105,7 @@ function build-example {
 function build-as {
     local CONTROLLER=$1
     local SRC_FOLDER=$2
+    local TARGET_NAME=$3
     local LPR_FILE=
     if [[ -d $SRC_FOLDER ]]
     then
@@ -116,14 +118,14 @@ function build-as {
         then
             case $CONTROLLER in
                 QEMU)
-                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_QEMUVPB "-CpARMV7A -WpQEMUVPB" qemuvpb.cfg ;;
+                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_QEMUVPB "-CpARMV7A -WpQEMUVPB" qemuvpb.cfg $TARGET_NAME ;;
 #                   test-qemu-controller ;;
                 RPi)
-                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_RPI_INCLUDING_RPI0 "-CpARMV6 -WpRPIB" rpi.cfg ;;
+                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_RPI_INCLUDING_RPI0 "-CpARMV6 -WpRPIB" rpi.cfg $TARGET_NAME ;;
                 RPi2)
-                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_RPI2_INCLUDING_RPI3 "-CpARMV7A -WpRPI2B" rpi2.cfg ;;
+                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_RPI2_INCLUDING_RPI3 "-CpARMV7A -WpRPI2B" rpi2.cfg $TARGET_NAME ;;
                 RPi3)
-                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_RPI3 "-CpARMV7A -WpRPI3B" rpi3.cfg ;;
+                    build-lpr $SRC_FOLDER $LPR_FILE $CONTROLLER CONTROLLER_RPI3 "-CpARMV7A -WpRPI3B" rpi3.cfg $TARGET_NAME ;;
             esac
         fi
     fi
@@ -136,9 +138,10 @@ function build-lpr {
     local CONTROLLER_SYMBOL=$4
     local CONTROLLER_COMPILER_OPTIONS=$5
     local CFG_NAME=$6
+    local TARGET_NAME=$7
     local INCLUDES="-Fi/root/ultibo/core/fpc/source/packages/fv/src -Fi/root/ultibo/core/fpc/source/rtl/ultibo/core"
     log .... building $LPR_FILE $CONTROLLER
-    mkdir -p $ARTIFACTS/$LPR_FILE/$CONTROLLER $OBJ/$CONTROLLER && \
+    mkdir -p $ARTIFACTS/$TARGET_NAME/$CONTROLLER $OBJ/$CONTROLLER && \
     ultibo-bash fpc \
      -d$CONTROLLER_SYMBOL \
      -l- \
@@ -156,7 +159,7 @@ function build-lpr {
      @/root/ultibo/core/fpc/bin/$CFG_NAME \
      $LPR_FILE |& tee -a $LOG && \
 \
-    mv kernel* $ARTIFACTS/$CONTROLLER
+    mv kernel* $ARTIFACTS/$TARGET_NAME/$CONTROLLER
     if [[ $? -ne 0 ]]; then log fail: $?; fi
 }
 
