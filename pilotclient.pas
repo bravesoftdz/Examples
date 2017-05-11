@@ -19,7 +19,7 @@ var
  Count:Cardinal;
  Status:LongWord;
 begin
- Status:=SerialDeviceWrite(Pilot,PChar(Line + #13 + #10),Length(Line) + 2,Count);
+ Status:=SerialDeviceWrite(Pilot,PChar(Line + #13 + #10),Length(Line) + 2,SERUAL_FLAG_NONE,Count);
  if Status <> ERROR_SUCCESS then
   LoggingOutput(Format('serial write error %d',[Status]));
 end;
