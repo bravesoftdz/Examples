@@ -64,8 +64,7 @@ begin
    if AnsiStartsStr('pilotrequestsserialdevice=',Param) then
     begin
      Start:=PosEx('=',Param);
-//   SetPilot(MidStr(Param,Start + 1,Length(Param) - Start));
-     Pilot:=SerialDeviceFindByName(MidStr(Param,Start + 1,Length(Param) - Start));
+     SetPilot(MidStr(Param,Start + 1,Length(Param) - Start));
     end;
   end;
 end;
