@@ -26,7 +26,8 @@ uses
   Framebuffer,
   SysUtils,
   GlobalConfig, {Include the global configuration unit so we can modify some parameters}
-  Logging;      {Include the logging unit}
+  Logging,
+  Crt;      {Include the logging unit}
 
 {A window handle and a counter.}
 var
