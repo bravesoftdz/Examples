@@ -11,7 +11,7 @@ uses
  StrUtils,SysUtils,Threads,Ultibo;
 
 var
-// ThreadHandle:TThreadHandle;
+ ThreadHandle:TThreadHandle;
  Pilot:PSerialDevice;
 
 procedure PilotSendRequest(Request:String);
@@ -42,7 +42,7 @@ begin
      Key:=ConsoleReadKey;
      if Ord(Key) = 163 then
       begin
-//       PilotSendRequest('restartwithnewestkernel');
+       PilotSendRequest('restartwithnewestkernel');
       end;
     end
    else
@@ -72,6 +72,7 @@ begin
  for I:=0 to ParamCount do
   begin
    Param:=ParamStr(I);
+   LoggingOutput(Format('Param %d = %s',[I,Param]));
    if AnsiStartsStr('pilotrequestsserialdevice=',Param) then
     begin
      Start:=PosEx('=',Param);
@@ -81,5 +82,5 @@ begin
 end;
 
 initialization
-// ThreadHandle:=BeginThread(@TrapCtrlAltdel,nil,ThreadHandle,THREAD_STACK_DEFAULT_SIZE);
+ ThreadHandle:=BeginThread(@TrapCtrlAltdel,nil,ThreadHandle,THREAD_STACK_DEFAULT_SIZE);
 end.
