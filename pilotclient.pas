@@ -32,7 +32,7 @@ var
  Key:Char;
 begin
  TrapCtrlAltDel:=0;
- Sleep(5 * 1000);
+ Sleep(7 * 1000);
  LoggingOutput('PilotClient starting');
  Pilot:=nil;
  ParseCommandLine;
@@ -41,6 +41,7 @@ begin
    if ConsoleKeyPressed then
     begin
      Key:=ConsoleReadKey;
+     LoggingOutput(Format('key %s <%d>',[Key,Ord(Key)]));
      if Ord(Key) = 163 then
       begin
        PilotSendRequest('restartwithnewestkernel');
