@@ -34,7 +34,7 @@ begin
  TrapCtrlAltDel:=0;
  Sleep(3 * 1000);
  Pilot:=nil;
- ParseCommandLine;
+// ParseCommandLine;
  while True do
   begin
    if KeyPressed then
@@ -42,7 +42,7 @@ begin
      Key:=ReadKey;
      if Ord(Key) = 163 then
       begin
-       PilotSendRequest('restartwithnewestkernel');
+//       PilotSendRequest('restartwithnewestkernel');
       end;
     end
    else
