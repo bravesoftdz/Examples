@@ -25,8 +25,6 @@ begin
 end;
 
 procedure PilotSendRequest(Request:String);
-var
- FullRequest:String;
 begin
  if Assigned(Pilot) then
   begin
