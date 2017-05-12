@@ -17,7 +17,7 @@ program LogOutput;
 
 {Declare some units used by this example.}
 uses
-  PilotClient,
+  PilotCtrlAltDel,
   QEMUVersatilePB,
   GlobalConst,
   GlobalTypes,
@@ -85,7 +85,7 @@ begin
 
  {Let's send a few more messages to the log}
  ConsoleWindowWriteLn(WindowHandle,'Sending lots of messages to the log');
- for Count:=1 to 10 do
+ for Count:=1 to 100 do
   begin
    LoggingOutput('Message no ' + IntToStr(Count) + ' sent at ' + DateTimeToStr(Now));
 

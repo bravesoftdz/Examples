@@ -1,4 +1,4 @@
-unit PilotClient;
+unit PilotCtrlAltDel;
 {$mode delphi}{$h+}
 
 interface
@@ -30,9 +30,8 @@ var
 begin
  if Assigned(Pilot) then
   begin
-   FullRequest:=Format('pilotrequest %s',[Request]);
-   LoggingOutput(FullRequest);
-   PilotWriteLn(FullRequest);
+   LoggingOutput(Request);
+   PilotWriteLn(Request);
   end;
 end;
 
@@ -61,7 +60,7 @@ begin
   begin
    Param:=ParamStr(I);
    LoggingOutput(Format('Param %d = %s',[I,Param]));
-   if AnsiStartsStr('pilotrequestsserialdevice=',Param) then
+   if AnsiStartsStr('pilot=',Param) then
     begin
      Start:=PosEx('=',Param);
      SetPilot(MidStr(Param,Start + 1,Length(Param) - Start));
@@ -87,7 +86,7 @@ begin
      LoggingOutput(Format('key %s <%d>',[Key,Ord(Key)]));
      if Ord(Key) = 163 then
       begin
-       PilotSendRequest('restartwithnewestkernel');
+       PilotSendRequest('ctrlaltdel');
       end;
     end
    else
