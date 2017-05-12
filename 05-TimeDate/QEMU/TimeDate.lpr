@@ -15,6 +15,7 @@ program TimeDate;
 
 {Declare some units used by this example.}
 uses
+  PilotCtrlAltDel,
   QEMUVersatilePB, {The QEMUVersatilePB unit provides all the required drivers for QEMU}
   GlobalConst,
   GlobalTypes,
