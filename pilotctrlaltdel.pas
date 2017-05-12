@@ -82,7 +82,7 @@ begin
     begin
      Key:=ConsoleReadKey;
      LoggingOutput(Format('key %s <%d>',[Key,Ord(Key)]));
-     if Ord(Key) = 163 then
+     if (Ord(Key) = 163) or (Key = 'q') then
       begin
        PilotSendRequest('ctrlaltdel');
       end;
