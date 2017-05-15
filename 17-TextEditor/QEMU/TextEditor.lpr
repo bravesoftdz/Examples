@@ -30,6 +30,7 @@ program TextEditor;
 
 {Declare some units used by this example.}
 uses
+ PilotCtrlAltDel,
  QEMUVersatilePB, {The QEMUVersatilePB unit gives us all the relevant drivers}
  GlobalConfig,
  GlobalConst,
@@ -37,7 +38,7 @@ uses
  Threads,
  Console,
  SysUtils,
- 
+
  {The main FreeVision units for App, Views, Drivers etc}
  Objects,
  Drivers,
@@ -141,10 +142,22 @@ begin
  else
    DisableCommands([cmTile, cmCascade]);
 end;
- 
+
 procedure TTVDemo.HandleEvent(var Event : TEvent);
 begin
  inherited HandleEvent(Event);                      { Call ancestor }
+ if (Event.What = evKeyDown) then begin
+   with Event do
+    begin
+     PilotLog(Format('KeyDown CharCode %d KeyCode %d KeyShift %d',[Ord(CharCode), Ord(KeyCode), Ord(KeyShift)]));
+//   ctrl-alt-del sequence:
+//   CharCode 0 KeyCode 64000 KeyShift 4
+//   CharCode 0 KeyCode 64512 KeyShift 12
+//   CharCode 0 KeyCode 41728 KeyShift 12
+     if (Ord(CharCode) = 0) and (Ord(KeyCode) = 41728) and (Ord(KeyShift) = 12) then
+      PilotCtrlAltDelReceived;
+    end;
+ end else
  if (Event.What = evCommand) then begin
    case Event.Command of
      cmClipBoard:
@@ -456,7 +469,9 @@ begin
  //  {Sleep for a second}
  //  Sleep(1000);
  // end;
- 
+
+// StartLogging;
+
  {Intitialize our FreeVision app}
  MyApp.Init;                    
  

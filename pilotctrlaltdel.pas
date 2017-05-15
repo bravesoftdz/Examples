@@ -2,6 +2,9 @@ unit PilotCtrlAltDel;
 {$mode delphi}{$h+}
 
 interface
+procedure PilotCtrlAltDelReceived;
+procedure PilotDoPollCtrlAltDel;
+procedure PilotLog(S:String);
 
 implementation
 
@@ -31,6 +34,16 @@ begin
    LoggingOutput(Request);
    PilotWriteLn(Request);
   end;
+end;
+
+procedure PilotLog(S:String);
+begin
+ PilotSendRequest(S);
+end;
+
+procedure PilotCtrlAltDelReceived;
+begin
+ PilotSendRequest('ctrlaltdel');
 end;
 
 procedure SetPilot(SerialDeviceName:String);
@@ -73,9 +86,7 @@ begin
  TrapCtrlAltDel:=0;
  Sleep(7 * 1000);
  LoggingOutput('');
- LoggingOutput('PilotClient starting');
- Pilot:=nil;
- ParseCommandLine;
+ LoggingOutput('PilotClient poll starting');
  while True do
   begin
    if ConsoleKeyPressed then
@@ -94,6 +105,12 @@ begin
   end;
 end;
 
-initialization
+procedure PilotDoPollCtrlAltDel;
+begin
  ThreadHandle:=BeginThread(@TrapCtrlAltdel,nil,ThreadHandle,THREAD_STACK_DEFAULT_SIZE);
+end;
+
+initialization
+ Pilot:=nil;
+ ParseCommandLine;
 end.
